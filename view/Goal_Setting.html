@@ -1,0 +1,51 @@
+
+<html>
+    
+    <head>
+        <link rel="stylesheet" href="../User_Authentication/auth.css">
+
+    </head>
+    <body style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+        <form  method="post" action="Goal_Setting_Check.php">
+            <fieldset style="width: auto; height: auto; background-color: rgb(230, 231, 231);">
+                <legend>Goal</legend>
+                <table>
+                    <tr>
+                        <td>Targated Goal:<br>
+                        
+                           <div id="d5"> <input type="number" id="goal" name="goal" value=""></div> 
+                           <marquee behavior="scroll" direction="left" >
+                           <h style="color: red;"> **minimum goal ammount $10</h>
+                            </marquee>
+                        </td>
+                    </tr>
+                   
+                </table>
+                <div id="d5"><input type="submit" name="Set" value="Set" onclick="f1()">   </div>
+                
+            </fieldset>
+            <h id="msg"></h>
+        </form>
+        <script>
+            function f1() {
+                let goal = document.getElementById('goal').value;
+                if(goal=="")
+                {
+                    event.preventDefault(); 
+                    document.getElementById('msg').innerHTML = "set a goal!!";
+                    document.getElementById('msg').style.color = "red";
+                }
+                else if (goal<10 ) {
+                    event.preventDefault(); 
+                    document.getElementById('msg').innerHTML = "minimum goal requirement not matched!!";
+                    document.getElementById('msg').style.color = "red";
+                } 
+                else {
+                    document.getElementById('msg').innerHTML = ""; 
+                }
+            }
+            
+
+        </script>
+    </body>
+</html>

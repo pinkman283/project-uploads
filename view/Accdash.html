@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome</title>
+  <style>
+    body, h1, p, a, form, table {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #dbeac0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    fieldset {
+      border: 2px solid #ff0000;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+      background-color: rgb(230, 229, 229);
+    }
+
+    /* Styling the table */
+    table {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    /* Styling the input buttons */
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #c3ff00;
+      background-color: #ff9d00;
+      color: white;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #a91616;
+    }
+  </style>
+</head>
+<body>
+
+  <form method="post" action="Accdash.php">
+    <fieldset style="width: 300px; height: auto;">
+      <table>
+        <tr>
+          <td></td>
+        </tr>
+      </table>
+      <input type="submit" name="account" value="Account">
+      <input type="submit" name="payment" value="Payment">
+      <input type="submit" name="rewards" value="Rewards">
+      <input type="submit" name="feedback" value="Feedback">
+      <input type="submit" name="remainder" value="Remainder"><br><br>
+    </fieldset>
+  </form>
+
+</body>
+</html>

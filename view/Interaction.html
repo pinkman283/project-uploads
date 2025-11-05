@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Feedback Form</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #badaae;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    p {
+      font-size: 18px;
+      color: #555;
+    }
+
+    form {
+      background-color: #e4e6e3;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    table {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    select, input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #db9b2b;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #ad1818;
+    }
+
+    #msg {
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Interaction</h2>
+  <p>Please share your feedback</p>
+
+  <form id="feedbackForm" method="post" onsubmit="return submitForm(event)">
+    <label for="feedback">Choose a feedback:</label>
+    <select id="feedback" name="feedback">
+      <option value="">Select Feedback</option>
+      <option value="good">Good</option>
+      <option value="bad">Bad</option>
+      <option value="awesome">Awesome</option>
+      <option value="worst">Worst</option>
+    </select><br><br>
+
+    <label for="userques">Ask Question:</label>
+    <input type="text" id="userques" name="userques" required><br><br>
+
+    <input type="submit" name="submit">
+    <p id="msg"></p>
+  </form>
+
+  <script>
+    // Function to handle the form submission via AJAX
+    function submitForm(event) {
+      event.preventDefault(); // Prevent the form from submitting normally
+
+      // Get form data
+      let feedback = document.getElementById("feedback").value;
+      let userques = document.getElementById("userques").value;
+
+      // Validate form fields
+      if (feedback === "" || userques === "") {
+        document.getElementById("msg").innerHTML = "Please fill all the fields.";
+        return false;
+      }
+
+      // Create a JSON object to send
+      let formData = {
+        feedback: feedback,
+        userques: userques
+      };
+
+      // Convert JSON object to string
+      let jsonData = JSON.stringify(formData);
+
+      // Create AJAX request
+      let xhttp = new XMLHttpRequest();
+      xhttp.open('POST', 'interaction.php', true);
+      xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhttp.send('mydata=' + jsonData);
+
+      // Handle the response from the server
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          let response = JSON.parse(this.responseText);
+          if (response.success) {
+            document.getElementById("msg").innerHTML = "Submitted Successfully!";
+          } else {
+            document.getElementById("msg").innerHTML = response.message;
+          }
+        }
+      };
+    }
+  </script>
+
+</body>
+</html>

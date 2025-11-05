@@ -1,0 +1,70 @@
+<?php
+include_once '../User_Authentication/signinCheck.php';
+include_once '../Bars/Top_bar.php';
+session_start();
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="../User_Authentication/auth.css">
+</head>
+<body style="background-color: rgb(240, 239, 236);">
+    <fieldset style="width: 400px; height: auto; display: flex; justify-content: center; align-items: center; text-align: center; margin-left: 150px; margin-top: 70px; background-color: white;">
+        <marquee behavior="scroll" direction="left">Welcome To Fundflock</marquee>
+        <?php
+        $name = $_SESSION['name']; 
+        echo $name; 
+        ?> 
+   </fieldset>
+
+    <form method="post" action="User_dash_check.php">
+        <fieldset style="width: 400px; height: auto; margin-left: 150px; background-color: white;">
+            <legend>Create a Campaign</legend>
+            <table>
+                <tr>
+                    <td>
+                        Select a category<br>
+                        <select id="categories" name="categories">
+                            <option value=""></option>
+                            <option value="education">Education</option>
+                            <option value="health">Health</option>
+                            <option value="environment">Environment</option>
+                            <option value="disaster_relief">Disaster Relief</option>
+                            <option value="poverty">Poverty</option>
+                            <option value="animal_welfare">Animal Welfare</option>
+                            <option value="technology_innovation">Technology and Innovation</option>
+                        </select>
+                    </td>
+                    <td>
+                        Create a new category<br>
+                        <div id="d5"><input type="text" id="category" name="category" value=""></div>
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <div id="d5"><input type="submit" id="create" name="create" value="Create Campaign" onclick="f1(event)"></div><br>
+            <a href="../User_Authentication/signin.html">Logout</a>
+        </fieldset>
+        
+    </form>
+    <fieldset style="width: 400px; height: auto; display: flex; justify-content: center; align-items: center; text-align: center; margin-left: 150px; background-color: white;">
+        Copyright 2025.
+    </fieldset>
+    <h id="msg"></h>
+    <script>
+        function f1(event) {
+            let categories = document.getElementById('categories').value;
+            let category = document.getElementById('category').value;
+
+            if (categories === "" && category === "") {
+                event.preventDefault(); 
+                document.getElementById('msg').innerHTML = "Please input at least one category or create a new category...";
+                document.getElementById('msg').style.color = "red";
+            } else {
+                document.getElementById('msg').innerHTML = ""; 
+            }
+        }
+    </script>
+</body>
+</html>

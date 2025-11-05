@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../User_Authentication/auth.css">
+    </head>
+    <body>
+        <fieldset style="width: 400px; height: auto; display: flex; justify-content: center; align-items: center; text-align: center;margin-left: 330px; margin-top: 70px; background-color: rgb(226, 229, 231);">
+            <marquee behavior="scroll" direction="left" >Welcome Admin</marquee>
+        </fieldset>
+        <form method="post" action="Admin_dash_check.php">
+            <fieldset style="width: 400px; height: auto; margin-left: 330px; background-color: rgb(226, 229, 231);">
+                Show all users and admins  
+                <div id="d4"><input type="submit" id="" name="showUser" value="click"></div>
+                Show all Campaigns  
+                <div id="d4"><input type="submit" id="" name="showCampaign" value="click"></div>
+                Update User    
+                <div id="d5"><input type="email" id="email" name="email" value=""></div>
+                <div id="d4"><input type="submit" id="updateUser" name="updateUser" value="Update" onclick="f1(event)"></div>
+                Delete User   
+                <div id="d5"><input type="email" id="email2" name="email2" value=""></div>
+                <div id="d4"><input type="submit" id="deleteUser" name="deleteUser" value="Delete" onclick="f2(event)"></div>
+                <a href="../User_Authentication/signin.html">Logout</a>
+            </fieldset>
+        </form>
+        <fieldset style="width: 400px; height: auto; display: flex; justify-content: center; align-items: center; text-align: center; margin-left: 330px;background-color: rgb(226, 229, 231);">
+            Copyright 2025.
+        </fieldset>
+        <h id="msg" style="margin-left: 300px;"></h>
+        <script>
+            function f1(event) {
+                event.preventDefault();
+                let email = document.getElementById('email').value;
+
+                if (email == "") {
+                    document.getElementById('msg').innerHTML = "Email required for update user!";
+                    document.getElementById('msg').style.color = "red";
+                } else {
+                    document.getElementById('msg').innerHTML = ""; 
+                    const userData = JSON.stringify({ email });
+
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.open('POST', 'Admin_dash_check.php', true);
+                    xhttp.setRequestHeader('Content-Type', 'application/json'); 
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState === 4 && this.status === 200) {
+                            const response = JSON.parse(this.responseText);
+                            if (response.status === "success") {
+                                msg.innerHTML = "User updated successfully!";
+                                msg.style.color = "green";
+                            } else {
+                                msg.innerHTML = "User update failed";
+                                msg.style.color = "red";
+                            }
+                        }
+                    };
+                    xhttp.send(userData); 
+                }
+            }
+
+            function f2(event) {
+                event.preventDefault();
+                let email2 = document.getElementById('email2').value;
+
+                if (email2 == "") {
+                    document.getElementById('msg').innerHTML = "Email required for delete user!";
+                    document.getElementById('msg').style.color = "red";
+                } else {
+                    document.getElementById('msg').innerHTML = ""; 
+                    const userData2 = JSON.stringify({ email2 });
+
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.open('POST', 'Admin_dash_check.php', true);
+                    xhttp.setRequestHeader('Content-Type', 'application/json'); 
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState === 4 && this.status === 200) {
+                            const response2 = JSON.parse(this.responseText);
+                            if (response2.status === "success") {
+                                msg.innerHTML = "User deleted successfully!";
+                                msg.style.color = "green";
+                            } else {
+                                msg.innerHTML = "User deletion failed";
+                                msg.style.color = "red";
+                            }
+                        }
+                    };
+                    xhttp.send(userData2);
+                }
+            }
+        </script>
+    </body>
+</html>

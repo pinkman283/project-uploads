@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Deadline Reminder</title>
+  <link rel="stylesheet" type="text/css" href="../css/mystyle.css">
+</head>
+<body>
+  <h1>Deadline Reminder</h1>
+
+  <?php
+  include 'dr.php';
+  ?>
+  
+  <form>
+    <label for="projectName">Project Name:</label><br>
+    <input type="text" id="projectName" value="Sample Project" readonly><br><br>
+    <label for="deadline">Deadline:</label><br>
+    <input type="text" id="deadline" value="<?= $deadline; ?>" readonly><br><br>
+
+    <?php if ($remaining_days > 0): ?>
+      <p>Days remaining: <?= $remaining_days; ?></p>
+    <?php elseif ($remaining_days == 0): ?>
+      <p>Deadline is today!</p>
+    <?php else: ?>
+      <p>Deadline has passed.</p>
+    <?php endif; ?>
+
+  </form>
+</body>
+</html>

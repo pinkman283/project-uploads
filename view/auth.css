@@ -1,0 +1,58 @@
+#d1 input {
+    background-color: rgb(139, 194, 243);
+    width: auto; 
+    height: auto; 
+    color: rgb(0, 0, 0);
+    cursor: pointer; 
+}
+
+#d1 input:hover {
+    background-color: rgb(31, 59, 87);
+}
+
+#d2 input {
+    background-color: rgb(139, 194, 243);
+    margin-left: auto;
+    border-radius: 0%;
+    width: 200px; 
+    height: auto; 
+    color: rgb(0, 0, 0);
+    cursor: pointer; 
+}
+
+#d2 input:hover {
+    background-color: rgb(31, 59, 87);
+}
+#d3 input {
+    margin-left: auto;
+    border-radius: 0%;
+    width: 200px; 
+    height: auto; 
+    color: rgb(0, 0, 0);
+}
+
+#d4 input {
+    background-color: rgb(188, 190, 190);
+    margin-left: auto;
+    border-radius: 0%;
+    width: auto; 
+    height: auto; 
+    color: rgb(0, 0, 0);
+}
+#d4 input:hover {
+    background-color: rgb(239, 239, 240);
+}
+
+#d5 input:hover{
+    background-color: rgb(132, 132, 155);
+    color: white;
+}
+
+#d6 input {
+    background-color: antiquewhite;
+    margin-left: 50px;
+    border-radius: 5%;
+    width: 400px; 
+    height: auto; 
+    color: rgb(0, 0, 0);
+}

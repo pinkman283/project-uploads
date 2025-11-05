@@ -1,0 +1,58 @@
+
+<html>
+    
+    <head>
+        <link rel="stylesheet" href="../User_Authentication/auth.css">
+    </head>
+    <body style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+        <form  method="post" action="Campaign_Title_Check.php">
+            <fieldset style="width: auto; height: auto; background-color: rgb(206, 214, 221);">
+                <legend><marquee behavior="scroll" direction="left" >Campaign Title and Description Editor</marquee></legend>
+                <table>
+                    <tr>
+                        <td>Title</td>
+                        <td>
+                           <div id="d4"> <input type="text" id="title" name="title" value="" ></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td>
+                           <div id="d4"> <input type="text" id="description" name="description" value="" ></div>
+                        </td>
+                    </tr>
+                </table><br>
+                <div id="d1"><input type="submit" name="save" value="save" onclick="f1()"></div>   
+            </fieldset>
+            <h id="msg"></h>
+
+        </form>
+        <script>
+            function f1() {
+                let title = document.getElementById('title').value;
+                let description=document.getElementById('description').value;
+                if(title==="" && description==="")
+                {
+                    event.preventDefault(); 
+                    document.getElementById('msg').innerHTML = "provide title and description!!";
+                    document.getElementById('msg').style.color = "red";
+                }
+                else if (title==="" ) {
+                    event.preventDefault(); 
+                    document.getElementById('msg').innerHTML = "add a title!!";
+                    document.getElementById('msg').style.color = "red";
+                } 
+                else if (description==="" ) {
+                    event.preventDefault(); 
+                    document.getElementById('msg').innerHTML = "add a description!!";
+                    document.getElementById('msg').style.color = "red";
+                }
+                else {
+                    document.getElementById('msg').innerHTML = ""; 
+                }
+            }
+            
+
+        </script>
+    </body>
+</html>

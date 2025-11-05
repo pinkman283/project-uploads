@@ -1,0 +1,108 @@
+<html>
+    <head>
+      <link rel="stylesheet" href="auth.css">
+    </head>
+    <body style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: rgb(218, 218, 207);">
+        <form method="post" action="signupCheck.php">
+        <fieldset style="width: auto; height: auto; background-color: rgb(243, 248, 244);">
+            <legend>
+                <marquee behavior="scroll" direction="left" > SignUp</marquee>
+            </legend>
+            <table>
+                <tr>
+                    <td>
+                        Name
+                    </td>
+                    <td>
+                        <input type="text" id="name" name="name" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" id="email" name="email" value=""></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" id="password" name="password" value=""></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input type="password" id="confirm_password" name="confirm_password" value=""></td>
+                </tr>
+                <tr>
+                    <td>User Type</td>
+                    <td>
+                        <input type="radio" id="user_type" name="user_type" value="user">User
+                        <input type="radio" id="user_type" name="user_type" value="admin">Admin
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    
+                    <td>
+                        <div id="d1">
+                        <input type="submit" id="" name="submit" value="submit" onclick="f1()">   </div> 
+                    </td>
+                    
+                </tr>
+            </table>
+        </fieldset>
+        <h id="msg"></h>
+        </form>
+
+        <script>
+            function f1(){
+                event.preventDefault(); // Prevent form submission
+
+            let name = document.getElementById('name').value.trim();
+            let email = document.getElementById('email').value.trim();
+            let password = document.getElementById('password').value;
+            let confirm_password = document.getElementById('confirm_password').value;
+            let user_type = document.querySelector('input[name="user_type"]:checked')?.value;
+            let msg = document.getElementById('msg');
+
+            if (!name || !email || !password || !confirm_password || !user_type) {
+                msg.innerHTML = "Please fill out all fields.";
+                msg.style.color = "red";
+                return;
+            }
+            if (password !== confirm_password) {
+                msg.innerHTML = "Passwords do not match.";
+                msg.style.color = "red";
+                return;
+            }
+
+            const userData = JSON.stringify({
+                name,
+                email,
+                password,
+                confirm_password,
+                user_type
+            });
+
+            
+            const xhttp = new XMLHttpRequest();
+            xhttp.open('POST', 'signupCheck.php', true);
+            xhttp.setRequestHeader('Content-Type', 'application/json'); 
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    const response = JSON.parse(this.responseText);
+
+                    if (response.status === "success") {
+                        msg.innerHTML = "Signup successful! Redirecting...";
+                        msg.style.color = "green";
+                        setTimeout(() => {
+                            window.location.href = response.redirectUrl;
+                        }, 2000);
+                    } else {
+                        msg.innerHTML = response.message;
+                        msg.style.color = "red";
+                    }
+                }
+            };
+            xhttp.send(userData); // Send JSON data
+
+            };
+        </script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <style>
+      body {
+        
+        margin: 0;
+        padding: 20px;
+        background-color: #d0f1bb;
+      }
+
+     
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+
+      form {
+        background-color: #e3e3e3;
+        padding: 20px;
+        border-radius: 8px;
+        width: 300px;
+        margin: 0 auto;
+      }
+
+      table {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #d6813b;
+        color: white;
+        border: none;
+        border-radius: 4px;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #c12929;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>Account Information</h1>
+
+    <form action="/action_page.php">
+      <label for="useracc">Account ID:</label>
+      <input type="text" id="useracc" name="useracc" required><br><br>
+
+      <label for="updatename">Name:</label>
+      <input type="text" id="updatename" name="updatename" required><br><br>
+
+      <label for="useremail">Email:</label>
+      <input type="text" id="useremail" name="useremail" required><br><br>
+
+      <input type="submit" value="Submit">
+      
+    </form>
+
+  </body>
+</html>

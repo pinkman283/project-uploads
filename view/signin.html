@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: rgb(225, 231, 243);">
+    <form id="loginForm" method="post" action="signinCheck.php">
+        <fieldset style="width: auto; height: auto; background-color: rgb(235, 236, 236);">
+            <marquee behavior="scroll" direction="left"> <legend>FundFlock</legend></marquee>
+            <table>
+                <tr>
+                    <td>Email: <br>
+                        <div id="d3"><input type="email" id="email" name="email" value=""></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password: <br>
+                        <div id="d3"><input type="password" id="password" name="password" value=""></div>
+                    </td>
+                </tr>
+            </table><br>
+            <div id="d4"><input type="submit" name="Login" value="Login" onclick="f1()"></div>
+            <a href="signup.html">Signup</a><br>
+            <a href="forgotPassword.html">Forgot Password?</a>
+        </fieldset>
+        <p id="msg"></p>
+    </form>
+
+    <script>
+        function f1(){
+            event.preventDefault();
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+
+            if (email === "" && password === "") {
+                document.getElementById('msg').innerHTML = "Please input all the fields...";
+                document.getElementById('msg').style.color = "red";
+            } else if (email === "") {
+                document.getElementById('msg').innerHTML = "Please input an email for login...";
+                document.getElementById('msg').style.color = "red";
+            } else if (password === "") {
+                document.getElementById('msg').innerHTML = "Please enter a password for login...";
+                document.getElementById('msg').style.color = "red";
+            } else {
+                
+                document.getElementById('msg').innerHTML = "";
+            }
+
+            let json = { email: email, password: password };
+            let userData = JSON.stringify(json);
+
+            // AJAX request
+            let xhttp = new XMLHttpRequest();
+            xhttp.open('POST', 'signinCheck.php', true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send('data=' + userData);
+
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    let response = JSON.parse(this.responseText);
+
+                    if (response.status === "success") {
+                        document.getElementById('msg').innerHTML = "Login successful. Redirecting...";
+                        document.getElementById('msg').style.color = "green";
+                        setTimeout(() => {
+                            window.location.href = response.redirectUrl;
+                        }, 2000);
+                    } else {
+                        document.getElementById('msg').innerHTML = "email or password doesn't match!!";
+                        document.getElementById('msg').style.color = "red";
+                    }
+                }
+            };
+        };
+    </script>
+</body>
+</html>

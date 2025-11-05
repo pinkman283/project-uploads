@@ -1,0 +1,73 @@
+
+<html>
+    
+    <head>
+        <link rel="stylesheet" href="../User_Authentication/auth.css">
+
+    </head>
+    <body style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+        <form  method="post" action="Deadline.php">
+            <fieldset style="width: auto; height: auto; background-color: rgb(215, 218, 219);">
+                <legend>Deadline and Duration selection</legend>
+                <table>
+                    <tr>
+                        <td>Campaign Duration</td>
+                        <td>
+                           <div id="d5"> <input type="number" id="duration" name="duration" value="duration"></div>  **maximum duration 60 days
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Start Date</td>
+                        <td>
+                            <div id="d5"><input type="date" id="start_date" name="start_date" value="start_date"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>End Date</td>
+                        <td>
+                            <div id="d5"><input type="date" id="end_date" name="end_date" value="end_date"></div>
+                        </td>
+                    </tr>
+                </table><br>
+               <div id="d5"> <input type="submit" name="Save" value="Save" onclick="f1()"> </div>  
+            </fieldset>
+            <h id="msg"></h>
+
+        </form>
+        <script>
+            function f1() {
+                let duration = document.getElementById('duration').value;
+                let start_date = document.getElementById('start_date').value;
+                let end_date = document.getElementById('end_date').value;
+
+                if (duration === "" || start_date === "" || end_date === "") {
+                    event.preventDefault();
+                    document.getElementById('msg').innerHTML = "Provide all information!";
+                    document.getElementById('msg').style.color = "red";
+                } else if (duration > 60 || duration < 1) {
+                    event.preventDefault();
+                    document.getElementById('msg').innerHTML = "Please input a valid duration!";
+                    document.getElementById('msg').style.color = "red";
+                } else {
+                    let startDateObj = new Date(start_date);
+                    let endDateObj = new Date(end_date);
+
+                    let timeDifference = endDateObj - startDateObj;
+
+                    let daysDifference = timeDifference / (1000 * 3600 * 24);
+
+                    if (daysDifference !== parseInt(duration)) {
+                        event.preventDefault();
+                        document.getElementById('msg').innerHTML = "Duration doesn't match!";
+                        document.getElementById('msg').style.color = "red";
+                    } else {
+                        document.getElementById('msg').innerHTML = "";
+                    }
+                }
+            }
+
+            
+
+        </script>
+    </body>
+</html>

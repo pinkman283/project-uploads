@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Submit Review</title>
+    <link rel="stylesheet" type="text/css" href="../css/mystyle.css">
+</head>
+<body>
+    <h2>Submit Your Review</h2>
+
+    <div id="message"></div>
+
+    <form id="reviewForm">
+        <label for="review">Review:</label>
+        <textarea id="review" name="review" required></textarea><br><br>
+        <input type="submit" value="Submit Review">
+    </form>
+
+    <script>
+        document.getElementById('reviewForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+            const reviewInput = document.getElementById('review').value;
+
+            if (!reviewInput.trim()) {
+                document.getElementById('message').innerHTML = "<p style='color:red;'>Review cannot be empty!</p>";
+                return;
+            }
+
+            // Simulate success message (replace this with actual logic if needed)
+            document.getElementById('message').innerHTML = "<p style='color:green;'>Thank you for your review!</p>";
+
+            // Optionally clear the form
+            document.getElementById('reviewForm').reset();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login</title>
+  <style>
+    body, h1, p, a, form {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #d2dea8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .main {
+      background-color: rgb(220, 219, 219);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #dca347;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #c02b3a;
+    }
+
+  </style>
+</head>
+<body>
+
+  <fieldset style="width: 350px; text-align: center; background-color: rgb(243, 242, 188);">
+    <h1>FundFlock</h1>
+
+    <div class="main">
+      <form id="loginForm">
+        Account No: <input type="text" id="accNo" name="accNo" value=""/><br>
+        Password: <input type="password" id="password" name="password" value=""/><br>
+        <input type="submit" name="submit" value="Submit">
+      </form>
+      <p id="errorMsg"></p>
+    </div>
+
+  </fieldset>
+
+<script>
+ 
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();  
+    
+    let accNo = document.getElementById('accNo').value;
+    let password = document.getElementById('password').value;
+
+  
+    let jsonData = {
+      'accNo': accNo,
+      'password': password
+    };
+
+    let userData = JSON.stringify(jsonData);
+
+    
+    let xhttp = new XMLHttpRequest();
+    xhttp.open('POST', 'loginCheck.php', true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+   
+    xhttp.send('mydata=' + userData);
+
+   
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        let response = JSON.parse(this.responseText);
+
+        if (response.success) {
+          window.location.href = 'User_dash.html';  
+        } else {
+      
+          document.getElementById('errorMsg').innerText = response.message;
+        }
+      }
+    };
+  });
+</script>
+
+</body>
+</html>
